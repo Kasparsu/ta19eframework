@@ -7,11 +7,14 @@ spl_autoload_register(function($class){
     require_once $path;
 });
 
-use \App\Controllers\HomeController as Home;
-
-$car = new \App\Car();
-var_dump($car);
-$plane = new \App\Plane();
-var_dump($plane);
-$homeController = new Home();
-var_dump($homeController);
+switch($_SERVER['REQUEST_URI']){
+    case '/':
+        echo "home page";
+        break;
+    case '/posts': 
+        echo "some posts";
+        break;
+    default: 
+        echo "404 page not found";
+        break;
+}
