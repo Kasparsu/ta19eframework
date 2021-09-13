@@ -7,14 +7,17 @@ spl_autoload_register(function($class){
     require_once $path;
 });
 
-switch($_SERVER['REQUEST_URI']){
-    case '/':
-        echo "home page";
-        break;
-    case '/posts': 
-        echo "some posts";
-        break;
-    default: 
-        echo "404 page not found";
-        break;
+require __DIR__ . '\\..\routes.php';
+
+$router = new \App\Router($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+$match = $router->match();
+if(isset($match['action']) && is_callable($match['action'])){
+    call_user_func($match['action']);
+} elseif(isset($match['action']) && is_array($match['action'])) {
+    $class = $match['action'][0];
+    $method = $match['action'][1];
+    $obj = new $class();
+    $obj->$method();
+} else {
+    echo "404";
 }
