@@ -5,4 +5,6 @@ use \App\Controllers\HomeController;
 //     echo "home page";
 // });
 Router::get('/', [HomeController::class, 'index']);
-Router::get('/posts', [HomeController::class, 'posts']);
+Router::post('/upload', [HomeController::class, 'upload']);
+Router::post('/login', [HomeController::class, 'login']);
+Router::get('/logout', [HomeController::class, 'logout']);

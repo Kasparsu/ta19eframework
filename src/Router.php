@@ -8,7 +8,8 @@ class Router {
     
     public function __construct($uri, $method)
     {
-        $this->uri = $uri;
+        $parts = parse_url($uri);
+        $this->uri = $parts['path'];
         $this->method = $method;
     }
     

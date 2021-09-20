@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 spl_autoload_register(function($class){
     $parts = explode('\\', $class);
@@ -6,8 +7,8 @@ spl_autoload_register(function($class){
     $path = __DIR__ . "\\..\\src\\" . implode('\\', $parts) . ".php";
     require_once $path;
 });
-
-require __DIR__ . '\\..\routes.php';
+require __DIR__ . '/../helpers.php';
+require __DIR__ . '/../routes.php';
 
 $router = new \App\Router($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
 $match = $router->match();
