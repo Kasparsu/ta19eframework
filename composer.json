@@ -1,0 +1,11 @@
+{
+    "name": "kaspar.suursalu/learnphp",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.3"
+    }
+}
