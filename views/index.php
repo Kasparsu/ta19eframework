@@ -8,7 +8,7 @@
 <body>
     Home page <?=$myName?>
     <?php if(!isset($_SESSION['isLoggedIn'])): ?>
-        <form action="/login" method="POST">
+        <form action="/login?username=kaspar&password=123456" method="POST">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="password" placeholder="password">
             <input type="submit">

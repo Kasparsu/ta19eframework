@@ -1,31 +1,17 @@
 <?php
 namespace App\Controllers;
-
+use PDO;
+use PDOException;
 class HomeController {
     public function index() {
-        var_dump($_SESSION);
-        var_dump($_COOKIE);
-        setcookie('somecoolcookie', 'sadasdad', time()+60*60*24*30);
-        $myName = 'kaspar';
-        view('index', compact('myName'));
-    }
-
-    public function upload() {
-        move_uploaded_file(
-            $_FILES['image']['tmp_name'],
-            __DIR__ . '/../../public/' . $_FILES['image']['name']
-        );
-        header('Location: /');
-    }
-
-    public function login(){
-        if($_POST['username'] === 'user' && $_POST['password'] === 'pass'){
-            $_SESSION['isLoggedIn'] = true;
+        try {
+            $conn = new PDO("sqlite:" . __DIR__ . '/../../db.sqlite');
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connected successfully";
+        } catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
         }
-        header('Location: /');
     }
-    public function logout(){
-        unset($_SESSION['isLoggedIn']);
-        header('Location: /');
-    }
+
 }
